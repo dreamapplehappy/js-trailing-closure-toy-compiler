@@ -280,7 +280,7 @@ const parser = (tokens) => {
     return ast;
 };
 
-// 将 AST 装换为目标语言的 AST
+// 将 AST 转换为目标语言的 AST
 // 遍历节点
 const traverser = (ast, visitor) => {
     const traverseNode = (node, parent) => {
