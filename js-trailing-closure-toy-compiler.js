@@ -183,6 +183,23 @@ const parser = (tokens) => {
                 trailingBlockParams: [],
                 trailingBody: []
             };
+            // 指定节点对应的父节点的类型，方便后面的判断
+            const specifyParentNodeType = () => {
+                // 过滤逗号
+                callExp.params = callExp.params.filter(p => p);
+                callExp.trailingBlockParams = callExp.trailingBlockParams.filter(p => p);
+                callExp.trailingBody = callExp.trailingBody.filter(p => p);
+
+                callExp.params.forEach((node) => {
+                    node.parentType = ARGUMENTS_PARENT_TYPE;
+                });
+                callExp.trailingBlockParams.forEach((node) => {
+                    node.parentType = ARGUMENTS_PARENT_TYPE;
+                });
+                callExp.trailingBody.forEach((node) => {
+                    node.parentType = BLOCK_PARENT_TYPE;
+                });
+            };
             const handleBraceBlock = () => {
                 callExp.hasTrailingBlock = true;
                 // 收集闭包函数的参数
@@ -213,21 +230,6 @@ const parser = (tokens) => {
                 } else {
                     callExp.trailingBody = blockBody;
                 }
-                // 处理逗号
-                callExp.params = callExp.params.filter(p => p);
-                callExp.trailingBlockParams = callExp.trailingBlockParams.filter(p => p);
-                callExp.trailingBody = callExp.trailingBody.filter(p => p);
-
-                // 指定节点的类型， 方便后面使用 TODO >0
-                callExp.params.forEach((node) => {
-                    node.parentType = ARGUMENTS_PARENT_TYPE;
-                });
-                callExp.trailingBlockParams.forEach((node) => {
-                    node.parentType = ARGUMENTS_PARENT_TYPE;
-                });
-                callExp.trailingBody.forEach((node) => {
-                    node.parentType = BLOCK_PARENT_TYPE;
-                });
                 // 处理右边的花括号
                 cur++;
             };
@@ -255,9 +257,8 @@ const parser = (tokens) => {
                 } else {
                     handleBraceBlock();
                 }
-                // // 处理逗号 TODO 优化，和上面的
-                // callExp.params = callExp.params.filter(p => p);
-                // callExp.trailingBlockParams = callExp.trailingBlockParams.filter(p => p);
+                // 指定节点对应的父节点的类型
+                specifyParentNodeType();
                 return callExp;
             } else {
                 cur++;
