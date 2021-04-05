@@ -38,7 +38,9 @@ a(1, "hello", (b, c) => {
 })
 ```
 
-项目的在线演示地址：[Javascript Trailing Closure Toy Compiler](https://dreamapple.gitee.io/code-examples/2021/0404/)
+项目的在线演示地址：[JavaScript Trailing Closure Toy Compiler](https://dreamapple.gitee.io/code-examples/2021/0404/)
+
+关于项目代码部分的详细解释可以阅读这篇文章：[动手写一个简单的编译器：在JavaScript中使用Swift的尾闭包语法](https://github.com/dreamapplehappy/blog/tree/master/2021/04/05)
 
 如果你对这个项目有什么建议和意见，欢迎提 [issues](https://github.com/dreamapplehappy/js-trailing-closure-toy-compiler/issues) 或者 [Pull requests](https://github.com/dreamapplehappy/js-trailing-closure-toy-compiler/pulls)
 
